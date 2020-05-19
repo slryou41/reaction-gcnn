@@ -1,0 +1,36 @@
+﻿metal_name,metal_bin,metal_instances,ligand_name,ligand_bin,ligand_instances,base_name,base_bin,base_instances,solvent_name,solvent_bin,solvent_instances,additive_name,additive_bin,additive_instances
+tetrakis(triphenylphosphine) palladium(0),M1,55829,triphenylphosphine,L1,4489,potassium carbonate,B1,48981,tetrahydrofuran,S1,18113,tetrabutylammomium bromide,A1,3003
+palladium diacetate,M2,16927,"dicyclohexyl-(2',6'-dimethoxybiphenyl-2-yl)-phosphane",L2,3163,sodium carbonate,B2,39769,ethanol,S2,24836,water,A2,1606
+"(1,1'-bis(diphenylphosphino)ferrocene)palladium(II) dichloride",M3,13723,XPhos,L3,2100,potassium phosphate,B3,17799,methanol,S3,4374,lithium chloride,A3,819
+"dichloro(1,1'-bis(diphenylphosphanyl)ferrocene)palladium(II)*CH2Cl2",M4,8918,tricyclohexylphosphine,L4,1808,caesium carbonate,B4,13345,"1,4-dioxane",S4,39107,hydrogenchloride,A4,780
+bis-triphenylphosphine-palladium(II) chloride,M5,8761,tris-(o-tolyl)phosphine,L5,902,sodium hydrogencarbonate,B5,3722,"1,2-dimethoxyethane",S5,19131,copper(l) iodide,A5,546
+tris-(dibenzylideneacetone)dipalladium(0),M6,5241,tri-tert-butyl phosphine,L6,694,cesium fluoride,B6,2810,acetonitrile,S6,4366,silver(l) oxide,A6,405
+palladium dichloride,M7,1512,tri tert-butylphosphoniumtetrafluoroborate,L7,616,sodium hydroxide,B7,2156,toluene,S7,28304,copper diacetate,A7,183
+bis(dibenzylideneacetone)-palladium(0),M8,1013,trisodium tris(3-sulfophenyl)phosphine,L8,556,potassium hydroxide,B8,2155,"N,N-dimethyl formamide",S8,15110,dmap,A8,181
+"dichloro[1,1'-bis(di-t-butylphosphino)ferrocene]palladium(II)",M9,1074,"1,1'-bis-(diphenylphosphino)ferrocene",L9,486,potassium fluoride,B9,2097,water,S9,92175,Aliquat 336,A9,169
+bis(tri-t-butylphosphine)palladium(0),M10,736,"4,5-bis(diphenylphos4,5-bis(diphenylphosphino)-9,9-dimethylxanthenephino)-9,9-dimethylxanthene",L10,424,triethylamine,B10,1370,1-methyl-pyrrolidin-2-one,S10,472,cetyltrimethylammonim bromide,A10,167
+"chloro(2-dicyclohexylphosphino-2?,4?,6?-triisopropyl-1,1?-biphenyl)[2-(2?-amino-1,1?-biphenyl?)]palladium(II)",M11,729,CyJohnPhos,L11,370,potassium phosphate tribasic trihydrate,B11,1016,,,,copper(l) chloride,A11,164
+bis(di-tert-?butyl(4-?dimethylaminophenyl)?phosphine)?dichloropalladium(II),M12,711,ruphos,L12,293,potassium acetate,B12,931,,,,potassium bromide,A12,157
+bis(eta3-allyl-mu-chloropalladium(II)),M13,559,"1,3,5,7-tetramethyl-8-phenyl-2,4,6-trioxa-8-phosphatricyclo[3.3.1.13,7]decane",L13,279,potassium tert-butylate,B13,912,,,,trifluoroacetic acid,A13,151
+tris(dibenzylideneacetone)dipalladium(0) chloroform complex,M14,509,tricyclohexylphosphine tetrafluoroborate,L14,240,potassium phosphate monohydrate,B14,826,,,,oxygen,A14,148
+palladium 10% on activated carbon,M15,861,johnphos,L15,223,sodium acetate,B15,418,,,,air,A15,112
+sodium tetrachloropalladate(II),M16,283,"4,4'-di-tert-butyl-2,2'-bipyridine",L16,216,sodium t-butanolate,B16,392,,,,18-crown-6 ether,A16,127
+palladium,M17,280,catacxium A,L17,192,barium dihydroxide,B17,374,,,,sodium dodecyl-sulfate,A17,113
+"(2-dicyclohexylphosphino-2?,4?,6?-triisopropyl-1,1?-biphenyl)[2-(2?-amino-1,1?-biphenyl)]palladium(II) methanesulfonate",M18,191,trifuran-2-yl-phosphane,L18,183,"N-ethyl-N,N-diisopropylamine",B18,336,,,,,,
+bis(benzonitrile)palladium(II) dichloride,M19,179,triphenyl-arsane,L19,182,lithium hydroxide,B19,321,,,,,,
+"(1,2-dimethoxyethane)dichloronickel(II)",M20,158,"1,1'-bis(di-tertbutylphosphino)ferrocene",L20,142,potassium phosphate tribasic heptahydrate,B20,317,,,,,,
+"bis(1,5-cyclooctadiene)nickel (0)",M21,155,"2,2'-bis-(diphenylphosphino)-1,1'-binaphthyl",L21,129,diisopropylamine,B21,209,,,,,,
+"[1,3-bis(2,6-diisopropylphenyl)imidazol-2-ylidene](3-chloropyridyl)palladium(ll) dichloride",M22,151,Tedicyp,L22,218,sodium methylate,B22,175,,,,,,
+(bis(tricyclohexyl)phosphine)palladium(II) dichloride,M23,148,bis[2-(diphenylphosphino)phenyl] ether,L23,108,tetrabutyl ammonium fluoride,B23,173,,,,,,
+dichloro bis(acetonitrile) palladium(II),M24,143,,,,barium hydroxide octahydrate,B24,171,,,,,,
+Pd EnCat-30TM,M25,137,,,,potassium dihydrogenphosphate,B25,166,,,,,,
+nickel(II) nitrate hexahydrate,M26,106,,,,potassium fluoride dihydrate,B26,156,,,,,,
+palladium(II) trifluoroacetate,M27,106,,,,"1,4-diaza-bicyclo[2.2.2]octane",B27,154,,,,,,
+dichloro{bis[1-(dicyclohexylphosphanyl)piperidine]}palladium(II),M28,102,,,,lithium hydroxide monohydrate,B28,143,,,,,,
+,,,,,,tetra-butylammonium acetate,B29,137,,,,,,
+,,,,,,sodium phosphate,B30,133,,,,,,
+,,,,,,potassium hydrogencarbonate,B31,131,,,,,,
+,,,,,,dipotassium hydrogenphosphate,B32,127,,,,,,
+,,,,,,"tripotassium phosphate ""n"" hydrate",B33,123,,,,,,
+,,,,,,cesiumhydroxide monohydrate,B34,112,,,,,,
+,,,,,,sodium phosphate dodecahydrate,B35,103,,,,,,

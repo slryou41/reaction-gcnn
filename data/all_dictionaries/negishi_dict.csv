@@ -1,0 +1,33 @@
+﻿metal_bin,metal_name,metal_instances,ligand_bin,ligand_name,ligand_instances,additive_bin,additive_name,additive_instances,solvent_bin,solvent_name,solvent_instances,temperature_bin,temperature_name,temperature_instances
+M1,tetrakis(triphenylphosphine) palladium(0),1902,L1,"1,1'-bis-(diphenylphosphino)ferrocene",233,A1,lithium chloride,243,S1,tetrahydrofuran,4525,T1,T<18,101
+M2,tris-(dibenzylideneacetone)dipalladium(0),572,L2,"dicyclohexyl-(2',6'-dimethoxybiphenyl-2-yl)-phosphane",196,A2,zinc,207,S2,"N,N-dimethyl-formamide",1003,T2,18≤T<23,2313
+M3,bis-triphenylphosphine-palladium(II) chloride,418,L3,XPhos,187,A3,copper(l) iodide,154,S3,1-methyl-pyrrolidin-2-one,674,T3,23≤T<50,643
+M4,palladium diacetate,370,L4,triphenylphosphine,161,A4,water,62,S4,toluene,541,T4,50≤T<61,975
+M5,bis(dibenzylideneacetone)-palladium(0),344,L5,trifuran-2-yl-phosphane,128,A5,diisobutylaluminium hydride,59,S5,"1,4-dioxane",335,T5,61≤T<80,658
+M6,"(1,1'-bis(diphenylphosphino)ferrocene)palladium(II) dichloride",334,L6,"monophosphine 1,2,3,4,5-pentaphenyl-1'-(di-tert-butylphosphino)ferrocene",95,A6,tetrabutylammomium bromide,52,S6,"N,N-dimethyl acetamide",247,T6,80≤T<100,673
+M7,bis(tri-t-butylphosphine)palladium(0),273,L7,tris-(o-tolyl)phosphine,70,A7,ammonium chloride,51,S7,hexane,219,T7,100≤T<120,696
+M8,"dichloro(1,1'-bis(diphenylphosphanyl)ferrocene)palladium(II)*CH2Cl2",248,L8,Ruphos,61,A8,n-butyllithium,46,S8,diethyl ether,203,T8,T≥120,479
+M9,dichloro{bis[1-(dicyclohexylphosphanyl)piperidine]}palladium(II),168,L9,"2?-(dicyclohexylphophanyl)-N2,N2,N6,N6-tetramethyl[1,1?-biphenyl]-2,6-diamine",37,A9,1-Methylpyrrolidine,42,S9,water,122,,,
+M10,palladium(l) tri-tert-butylphosphine iodide dimer,101,L10,tripiperidino-phosphine,37,A10,Li2CoCl4,42,S10,"1,2-dimethoxyethane",67,,,
+M11,bis(tricyclohexylphosphine)nickel(II) dichloride,99,L11,tri tert-butylphosphoniumtetrafluoroborate,35,A11,sodium formate,42,,,,,,
+M12,"[(C10H13-1,3-(CH2P(C6H11)2)2)Pd(Cl)]",87,L12,"1,2-bis-(dicyclohexylphosphino)ethane",33,A12,hydrogenchloride,36,,,,,,
+M13,"1,3-bis[(diphenylphosphino)propane]dichloronickel(II)",63,L13,"4,5-bis(diphenylphos4,5-bis(diphenylphosphino)-9,9-dimethylxanthenephino)-9,9-dimethylxanthene",31,A13,caesium carbonate,36,,,,,,
+M14,"bis(1,5-cyclooctadiene)nickel (0)",56,L14,"N,N,N,N,-tetramethylethylenediamine",24,A14,zinc diacetate,32,,,,,,
+M15,nickel dichloride,56,L15,"[2,2]bipyridinyl",22,A15,potassium carbonate,30,,,,,,
+M16,tris(dibenzylideneacetone)dipalladium(0) chloroform complex,46,L16,"4,4'-di-tert-butyl-2,2'-bipyridine",21,A16,norborn-2-ene,30,,,,,,
+M17,dichlorobis(tri-O-tolylphosphine)palladium,46,L17,"1,2-Ph2-3,4-bis(2,4,6-(t-Bu)3-phenylphophinidene)cyclobutene",20,A17,lithium bromide,28,,,,,,
+M18,palladium,44,L18,johnphos,20,A18,"1,3-dimethyl-3,4,5,6-tetrahydro-2(1H)-pyrimidinone",23,,,,,,
+M19,"[1,3-bis(2,6-diisopropylphenyl)imidazol-2-ylidene](3chloro-pyridyl)palladium(II) dichloride",136,L19,tri-tert-butyl phosphine,19,A19,methylzinc chloride,22,,,,,,
+M20,C20H20ClN3Ni,42,L20,tricyclohexylphosphine,18,A20,1-methyl-pyrrolidin-2-one,21,,,,,,
+M21,"dichloro(1,3-bis(2,6-bis(3-pentyl)phenyl)imidazolin-2-ylidene)(3-chloropyridyl)palladium(II)",39,,,,A21,zinc(II) chloride,21,,,,,,
+M22,bis(triphenylphosphine)nickel(II) chloride,38,,,,A22,isoquinoline,20,,,,,,
+M23,C26H24ClN2NiP*0.1C7H8,35,,,,A23,sodium carbonate,19,,,,,,
+M24,cobalt(II) chloride,34,,,,A24,1-ethyl-2-pyrrolidinone,18,,,,,,
+M25,copper(I) bromide,31,,,,A25,sodium,16,,,,,,
+M26,C40H55Cl5N3Pd,30,,,,A26,1-methyl-1H-imidazole,15,,,,,,
+M27,"[1,3-bis(2,6-diisoheptylphenyl)-4,5-dichloroimidazol-2-ylidene](3-chloropyridyl)palladium(II) dichloride",29,,,,A27,oxovanadium(V) ethoxydichloride,12,,,,,,
+M28,dichloro bis(acetonitrile) palladium(II),29,,,,A28,"2-(N,N-dimethylamino)athanol",11,,,,,,
+M29,palladium(II) trifluoroacetate,27,,,,A29,[bdmim][BF4],11,,,,,,
+M30,"1,2-bis(diphenylphosphino)ethane nickel(II) chloride",27,,,,A30,1-butyl-2-(diphenylphosphanyl)-3-methylimidazolium hexafluorophosphate,11,,,,,,
+M31,C27H22Cl2N3NiP,24,,,,,,,,,,,,
+M32,C38H34Br2N4Ni2P2,23,,,,,,,,,,,,
