@@ -1,0 +1,19 @@
+﻿activator_bin,activator_name,activator_instances,gas_bin,gas_name,gas_instances,ligand_bin,ligand_name,ligand_instances,metal_bin,metal_name,metal_instances,other_bin,other_name,other_instances,solvent_bin,solvent_name,solvent_instances,temperature_bin,temperature_name,temperature_instances,pressure_bin,pressure_name,pressure_instances
+A1,4-methylmorpholine N-oxide,420,G1,carbon monoxide,1169,L1,"1,1,3,3-tetramethyl-2-thiourea",128,M1,dicobalt octacarbonyl,614,O1,4 A molecular sieve,84,S1,toluene,966,T1,T<20,83,P1,P<760,35
+A2,trimethylamine-N-oxide,212,G2,none,1580,L2,"1,3-bis-(diphenylphosphino)propane",93,M2,di(rhodium)tetracarbonyl dichloride,333,O2,zinc,50,S2,dichloromethane,601,T2,T=20,961,P2,P=760,2392
+A3,dimethyl sulfoxide,137,,,,L3,"2,2'-bis-(diphenylphosphino)-1,1'-binaphthyl",31,M3,"chloro(1,5-cyclooctadiene)rhodium(I) dimer",140,O3,hydrogen,40,S3,tetrahydrofuran,318,T3,20<T≤60,299,P3,760<P≤7600,169
+A4,cyclohexylamine,68,,,,L4,triphenylphosphine,16,M4,[RhCl(CO)dppp]2,92,O4,ethylene glycol,30,S4,"1,2-dichloro-ethane",171,T4,60<T≤77,370,P4,P>7600,153
+A5,n-butyl methyl sulfide,27,,,,L5,tri-n-butylphosphine sulfide,15,M5,cobalt(II) bromide,44,O5,cetyltrimethylammonim bromide,22,S5,"1,2-dimethoxyethane",145,T5,77<T≤94,338,,,
+A6,silver trifluoromethanesulfonate,23,,,,L6,"(S)-3,5-di-tert-butyl-4-methoxyphenyl-(6,6?-dimethoxybiphenyl-2,2?-diyl)-bis(diphenylphosphine)",12,M6,palladium dichloride,33,O6,Celite,17,S6,acetonitrile,141,T6,94<T≤120,395,,,
+A7,silver tetrafluoroborate,18,,,,,,,M7,dodecacarbonyl-triangulo-triruthenium,32,O7,Triton X(R)-100,37,S7,not listed,102,T7,T>120,303,,,
+A8,silver hexafluoroantimonate,19,,,,,,,M8,Co2Rh2 nanoparticles immobilized on charcoal,50,O8,acetic anhydride,15,S8,water,71,,,,,,
+A9,(4-fluorobenzyl)(methyl)sulfide,14,,,,,,,M9,tetracobaltdodecacarbonyl,44,O9,lithium chloride,15,S9,benzene,76,,,,,,
+A10,dinitrogen monoxide,14,,,,,,,M10,molybdenum hexacarbonyl,23,O10,water,11,S10,para-xylene,136,,,,,,
+A11,4-methylmorpholine 4-oxide monohydrate,13,,,,,,,M11,Rh(dppp)2Cl,19,O11,oxygen,10,S11,hexane,43,,,,,,
+,,,,,,,,,M12,cobalt nanoparticles on charcoal,36,O12,potassium carbonate,8,S12,dimethyl sulfoxide,39,,,,,,
+,,,,,,,,,M13,methylidynetricobalt nonacarbonyl,25,O13,triethylsilane,8,S13,"1,4-dioxane",33,,,,,,
+,,,,,,,,,M14,bis(triphenylphosphine)(carbonyl)rhodium chloride,11,,,,S14,dibutyl ether,33,,,,,,
+,,,,,,,,,M15,PdCl(OHNCCH3C6H4)(C5H5N),10,,,,S15,diethyl ether,22,,,,,,
+,,,,,,,,,M16,"bis(1,5-cyclooctadiene)diiridium(I) dichloride",9,,,,,,,,,,,,
+,,,,,,,,,M17,diiron nonacarbonyl,9,,,,,,,,,,,,
+,,,,,,,,,M18,iron(II) bis(trimethylsilyl)amide,9,,,,,,,,,,,,
