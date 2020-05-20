@@ -21,6 +21,7 @@ from chainer.iterators import SerialIterator
 from chainer.training.extensions import Evaluator
 
 from chainer import cuda, serializers
+from chainer import functions as F
 from chainer import Variable
 
 from chainer_chemistry.models.prediction import Regressor
@@ -33,7 +34,7 @@ from dataset.suzuki_csv_file_parser import SuzukiCSVFileParser as CSVFileParser
 from chainer_chemistry.datasets import NumpyTupleDataset
 
 from sklearn.preprocessing import StandardScaler  # NOQA
-from train_suzuki_classification import GraphConvPredictor  # NOQA
+from train_suzuki_classification import GraphConvPredictor, set_up_predictor  # NOQA
 
 from chainer_chemistry.utils import save_json
 import chainer
@@ -67,7 +68,7 @@ def parse_arguments():
     parser = ArgumentParser(description='Regression on own dataset')
     parser.add_argument('--datafile', '-d', type=str,
                         # default='oxidation_test.csv',
-                        default='suzuki_type_test_v2.csv',
+                        default='data/suzuki_type_test_v2.csv',
                         # default='CN_coupling_test.csv',
                         help='csv file containing the dataset')
     parser.add_argument('--method', '-m', type=str, choices=method_list,
