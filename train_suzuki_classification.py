@@ -211,7 +211,7 @@ def parse_arguments():
     parser = ArgumentParser(description='Regression on own dataset')
     parser.add_argument('--datafile', '-d', type=str,
                         # default='oxidation_train.csv',
-                        default='data/suzuki_type_test_v2.csv',
+                        default='data/suzuki_type_train_v2.csv',
                         # default='CN_coupling_train.csv',
                         help='csv file containing the dataset')
     parser.add_argument('--method', '-m', type=str, choices=method_list,
