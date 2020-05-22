@@ -1,6 +1,6 @@
 # Requirements
 
-This code supports suzuki, CN coupling and neigishi datasets. 
+This code supports suzuki, CN coupling and negishi datasets. 
 1. Install chainer-chemistry
 2. Training command (with gpu)
 ```python
