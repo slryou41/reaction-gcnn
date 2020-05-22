@@ -265,11 +265,11 @@ def main():
         class_dict = {'M': 44, 'L': 47, 'B': 13, 'S': 22, 'A': 74}
         dataset_filename = 'CN_data.npz'
         labels = ['Yield', 'M', 'L', 'B', 'S', 'A', 'id']
-    elif args.data_name == 'Neigishi':
-        datafile = 'data/Neigishi_train.csv'
+    elif args.data_name == 'Negishi':
+        datafile = 'data/Negishi_train.csv'
         class_num = 106
         class_dict = {'M': 32, 'L': 20, 'T': 8, 'S': 10, 'A': 30}
-        dataset_filename = 'Neigishi_data.npz'
+        dataset_filename = 'Negishi_data.npz'
         labels = ['Yield', 'M', 'L', 'T', 'S', 'A', 'id']
     else:
         raise ValueError('Unexpected dataset name')
