@@ -21,8 +21,8 @@ from chainer.iterators import SerialIterator
 from chainer.training.extensions import Evaluator
 
 from chainer import cuda, serializers
-from chainer import functions as F
 from chainer import Variable
+from chainer import functions as F
 
 from chainer_chemistry.models.prediction import Regressor
 from models.classifier import Classifier
@@ -34,7 +34,7 @@ from dataset.suzuki_csv_file_parser import SuzukiCSVFileParser as CSVFileParser
 from chainer_chemistry.datasets import NumpyTupleDataset
 
 from sklearn.preprocessing import StandardScaler  # NOQA
-from train_suzuki_classification import GraphConvPredictor, set_up_predictor  # NOQA
+from train import GraphConvPredictor, set_up_predictor  # NOQA
 
 from chainer_chemistry.utils import save_json
 import chainer
@@ -66,17 +66,17 @@ def parse_arguments():
 
     # Set up the argument parser.
     parser = ArgumentParser(description='Regression on own dataset')
-    parser.add_argument('--datafile', '-d', type=str,
-                        # default='oxidation_test.csv',
-                        default='data/suzuki_type_test_v2.csv',
-                        # default='CN_coupling_test.csv',
-                        help='csv file containing the dataset')
+#     parser.add_argument('--datafile', '-d', type=str,
+#                         # default='oxidation_test.csv',
+#                         default='data/suzuki_type_test_v2.csv',
+#                         # default='CN_coupling_test.csv',
+#                         help='csv file containing the dataset')
     parser.add_argument('--method', '-m', type=str, choices=method_list,
                         help='method name', default='nfp')
-    parser.add_argument('--label', '-l', nargs='+',
-                        # default=['Yield', 'Temperature', 'Reagent', 'Catalyst'],
-                        default=['Yield', 'M', 'L', 'B', 'S', 'A', 'id'],
-                        help='target label for regression')
+#     parser.add_argument('--label', '-l', nargs='+',
+#                         # default=['Yield', 'Temperature', 'Reagent', 'Catalyst'],
+#                         default=['Yield', 'M', 'L', 'B', 'S', 'A', 'id'],
+#                         help='target label for regression')
     parser.add_argument('--scale', type=str, choices=scale_list,
                         help='label scaling method', default='standardize')
     parser.add_argument('--conv-layers', '-c', type=int, default=4,
@@ -100,6 +100,8 @@ def parse_arguments():
                         help='saved model filename')
     parser.add_argument('--load-modelname', type=str,
                         help='load model filename')
+    parser.add_argument('--data-name', type=str, default='suzuki',
+                        help='dataset name')
     return parser.parse_args()
 
 
@@ -108,17 +110,30 @@ def main():
     args = parse_arguments()
     device = args.gpu
     method = args.method
-
-    if args.label:
-        labels = args.label
-        class_num = len(labels) if isinstance(labels, list) else 1
-        cache_dir = os.path.join('input', '{}_all'.format(method))
-        # class_num = 1  # NOW YIELD AND TEMP
-        class_num = 119  #113
-        # class_num = 206
+    
+    if args.data_name == 'suzuki':
+        datafile = 'data/suzuki_type_test_v2.csv'
+        class_num = 119
+        class_dict = {'M': 28, 'L': 23, 'B': 35, 'S': 10, 'A': 17}
+        dataset_filename = 'test_data.npz'
+        labels = ['Yield', 'M', 'L', 'B', 'S', 'A', 'id']
+    elif args.data_name == 'CN':
+        datafile = 'data/CN_coupling_test.csv'
+        class_num = 206
+        class_dict = {'M': 44, 'L': 47, 'B': 13, 'S': 22, 'A': 74}
+        dataset_filename = 'test_CN_data.npz'
+        labels = ['Yield', 'M', 'L', 'B', 'S', 'A', 'id']
+    elif args.data_name == 'Neigishi':
+        datafile = 'data/Neigishi_test.csv'
+        class_num = 106
+        class_dict = {'M': 32, 'L': 20, 'T': 8, 'S': 10, 'A': 30}
+        dataset_filename = 'test_Neigishi_data.npz'
+        labels = ['Yield', 'M', 'L', 'T', 'S', 'A', 'id']
     else:
-        raise ValueError('No target label was specified.')
-
+        raise ValueError('Unexpected dataset name')
+    
+    cache_dir = os.path.join('input', '{}_all'.format(method))
+    
     # Dataset preparation.
     def postprocess_label(label_list):
         return numpy.asarray(label_list, dtype=numpy.float32)
@@ -127,7 +142,7 @@ def main():
     
     # Apply a preprocessor to the dataset.
     # dataset_filename = 'CN_test_data.npz'
-    dataset_filename = 'test_data.npz'
+    # dataset_filename = 'test_data.npz'
 
     # Load the cached dataset.
     dataset_cache_path = os.path.join(cache_dir, dataset_filename)
@@ -139,8 +154,9 @@ def main():
     if dataset is None:
         preprocessor = preprocess_method_dict[args.method]()
         parser = CSVFileParser(preprocessor, postprocess_label=postprocess_label,
-                                   labels=labels, smiles_col=['Reactant1', 'Reactant2', 'Product'])
-        dataset = parser.parse(args.datafile)['dataset']
+                              labels=labels, smiles_col=['Reactant1', 'Reactant2', 'Product'],
+                              label_dicts=class_dict)
+        dataset = parser.parse(datafile)['dataset']
         
         # Cache the laded dataset.
         if not os.path.exists(cache_dir):

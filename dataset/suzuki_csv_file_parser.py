@@ -23,11 +23,11 @@ class SuzukiCSVFileParser(SuzukiDataFrameParser):
                  labels=None,
                  smiles_col='smiles',
                  postprocess_label=None, postprocess_fn=None,
-                 logger=None):
+                 logger=None, label_dicts=None):
         super(SuzukiCSVFileParser, self).__init__(
             preprocessor, labels=labels, smiles_col=smiles_col,
             postprocess_label=postprocess_label, postprocess_fn=postprocess_fn,
-            logger=logger)
+            logger=logger, label_dicts=label_dicts)
 
     def parse(self, filepath, return_smiles=False, target_index=None,
               return_is_successful=False):

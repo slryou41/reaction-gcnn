@@ -1,3 +1,10 @@
 __pycache__
 .ipynb_checkpoints
 .DS_Store
+relgcn/
+ggnn/
+nfp/
+CN_ggnn/
+Neigishi_ggnn/
+*.json
+data/
