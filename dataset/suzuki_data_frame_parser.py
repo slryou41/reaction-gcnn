@@ -99,7 +99,7 @@ class SuzukiDataFrameParser(BaseFileParser):
                  labels=None,
                  smiles_col=['Reactant', 'Product'],
                  postprocess_label=None, postprocess_fn=None,
-                 logger=None):
+                 logger=None, label_dicts=None):
         super(SuzukiDataFrameParser, self).__init__(preprocessor)
         if isinstance(labels, str):
             labels = [labels, ]
@@ -108,6 +108,7 @@ class SuzukiDataFrameParser(BaseFileParser):
         self.postprocess_label = postprocess_label
         self.postprocess_fn = postprocess_fn
         self.logger = logger or getLogger(__name__)
+        self.label_dicts = label_dicts
 
     def parse(self, df, return_smiles=False, target_index=None,
               return_is_successful=False):
@@ -158,8 +159,6 @@ class SuzukiDataFrameParser(BaseFileParser):
             success_count = 0
             for row in tqdm(df.itertuples(index=False), total=df.shape[0]):
                 smiles = [row[i] for i in smiles_indices]
-                # smiles1 = row[smiles_index1]
-                # smiles2 = row[smiles_index2]
                 labels = [row[i] for i in labels_index]
                                 
                 # Reagent vector for each category
@@ -170,19 +169,25 @@ class SuzukiDataFrameParser(BaseFileParser):
                     else:
                         labels[reagent_i] = [int(x) for x in labels[reagent_i][1:-1].split(',')]
                     
-                num_dicts = {'M': 28, 'L': 23, 'B': 35, 'S': 10, 'A': 17} # A has nan -> 18
+                # num_dicts = {'M': 28, 'L': 23, 'B': 35, 'S': 10, 'A': 17} # A has nan -> 18
                 # num_dicts = {'M': 44, 'L': 47, 'B': 13, 'S': 22, 'A': 74}  # For C-N coupling
                 
+                boundaries = []
+                total_labels = 0
+                for lb, lb_num in self.label_dicts.items():
+                    total_labels += lb_num
+                                                        
+                
                 # For now, predict single vector
-                rea_cat = numpy.zeros(119, dtype='float32')  # 113 -> 119 (nan + 5 null)
+                rea_cat = numpy.zeros(total_labels+len(self.label_dicts)+1, dtype='float32')  # 113 -> 119 (nan + 5 null)
                 # rea_cat = numpy.zeros(206, dtype='float32')  # 113 -> 119 (nan + 5 null)
-                for ii in range(1, 6):
+                for ii in range(1, 1+len(self.label_dicts)):
                     rea_cat[labels[ii]] = 1.
                     
                 # if the sample does not have reagent in each category, map to null class
-                for ii in range(1, 6):
+                for ii in range(1, 1+len(self.label_dicts)):
                     if len(labels[ii]) == 0:  # no reagent in this category
-                        rea_cat[114 + ii-1] = 1.
+                        rea_cat[total_labels + ii] = 1.
                         # rea_cat[201 + ii-1] = 1.
                     
                 labels = [labels[0], labels[-1], rea_cat]
