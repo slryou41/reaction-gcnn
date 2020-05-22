@@ -27,6 +27,7 @@ from chainer.training import extensions as E
 from sklearn.preprocessing import StandardScaler
 from chainer import iterators
 
+import chainer_chemistry
 from chainer_chemistry.dataset.converters import concat_mols
 from chainer_chemistry.dataset.preprocessors import preprocess_method_dict
 from chainer_chemistry.datasets import NumpyTupleDataset
@@ -161,16 +162,27 @@ def set_up_predictor(method, n_unit, conv_layers, class_num):
     
     if method == 'nfp':
         print('Training an NFP predictor...')
-        nfp = NFP(out_dim=n_unit, hidden_dim=n_unit, n_layers=conv_layers)
+        if chainer_chemistry.__version__ == '0.7.0':
+          nfp = NFP(out_dim=n_unit, hidden_channels=n_unit, n_update_layers=conv_layers)
+        else:
+          nfp = NFP(out_dim=n_unit, hidden_dim=n_unit, n_layers=conv_layers)
         predictor = GraphConvPredictor(nfp, mlp)
     elif method == 'ggnn':
         print('Training a GGNN predictor...')
-        ggnn = GGNN(out_dim=n_unit, hidden_dim=n_unit, n_layers=conv_layers)
+        if chainer_chemistry.__version__ == '0.7.0':
+          ggnn = GGNN(out_dim=n_unit, hidden_channels=n_unit, n_update_layers=conv_layers)
+        else:
+          ggnn = GGNN(out_dim=n_unit, hidden_dim=n_unit, n_layers=conv_layers)
         predictor = GraphConvPredictor(ggnn, mlp)
     elif method == 'schnet':
         print('Training an SchNet predictor...')
-        schnet = SchNet(out_dim=class_num, hidden_dim=n_unit,
-                        n_layers=conv_layers)
+        if chainer_chemistry.__version__ == '0.7.0':
+          schnet = SchNet(out_dim=class_num, hidden_channels=n_unit,
+                          n_update_layers=conv_layers)
+        else:
+          schnet = SchNet(out_dim=class_num, hidden_dim=n_unit,
+                          n_layers=conv_layers)
+            
         predictor = GraphConvPredictor(schnet, None)
     elif method == 'weavenet':
         print('Training a WeaveNet predictor...')
@@ -183,18 +195,26 @@ def set_up_predictor(method, n_unit, conv_layers, class_num):
         predictor = GraphConvPredictor(weavenet, mlp)
     elif method == 'rsgcn':
         print('Training an RSGCN predictor...')
-        rsgcn = RSGCN(out_dim=n_unit, hidden_dim=n_unit, n_layers=conv_layers)
+        if chainer_chemistry.__version__ == '0.7.0':
+          rsgcn = RSGCN(out_dim=n_unit, hidden_channels=n_unit, n_update_layers=conv_layers)
+        else:
+          rsgcn = RSGCN(out_dim=n_unit, hidden_dim=n_unit, n_layers=conv_layers)
         predictor = GraphConvPredictor(rsgcn, mlp)
     elif method == 'relgcn':
         print('Training an RelGCN predictor...')
         num_edge_type = 4
+        
         relgcn = RelGCN(out_channels=n_unit, num_edge_type=num_edge_type,
                         scale_adj=True, readout=True)
         predictor = GraphConvPredictor(relgcn, mlp)
     elif method == 'relgat':
         print('Training an RelGAT predictor...')
-        relgat = RelGAT(out_dim=n_unit, hidden_dim=n_unit,
-                        n_layers=conv_layers)
+        if chainer_chemistry.__version__ == '0.7.0':
+          relgat = RelGAT(out_dim=n_unit, hidden_channels=n_unit,
+                          n_update_layers=conv_layers)
+        else:
+          relgat = RelGAT(out_dim=n_unit, hidden_dim=n_unit,
+                          n_layers=conv_layers)
         predictor = GraphConvPredictor(relgat, mlp)
     else:
         raise ValueError('[ERROR] Invalid method: {}'.format(method))
