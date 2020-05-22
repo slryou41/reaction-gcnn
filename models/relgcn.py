@@ -2,6 +2,7 @@ import chainer
 from chainer import cuda
 from chainer import functions
 
+import chainer_chemistry
 from chainer_chemistry.config import MAX_ATOMIC_NUM
 from chainer_chemistry.links.connection.embed_atom_id import EmbedAtomID
 from chainer_chemistry.links.connection.graph_linear import GraphLinear
@@ -72,9 +73,14 @@ class RelGCN(chainer.Chain):
                 RelGCNUpdate(ch_list[i], ch_list[i+1], num_edge_type)
                 for i in range(len(ch_list)-1)])
             if readout:
-                self.rgcn_readout = GGNNReadout(
-                    out_dim=out_channels, hidden_dim=ch_list[-1],
-                    nobias=True, activation=functions.tanh)
+                if chainer_chemistry.__version__ == '0.7.0':
+                    self.rgcn_readout = GGNNReadout(
+                        out_dim=out_channels, in_channels=ch_list[-1],
+                        nobias=True, activation=functions.tanh)
+                else:
+                    self.rgcn_readout = GGNNReadout(
+                        out_dim=out_channels, hidden_dim=ch_list[-1],
+                        nobias=True, activation=functions.tanh)
         # self.num_relations = num_edge_type
         self.input_type = input_type
         self.scale_adj = scale_adj
