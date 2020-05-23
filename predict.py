@@ -66,17 +66,8 @@ def parse_arguments():
 
     # Set up the argument parser.
     parser = ArgumentParser(description='Regression on own dataset')
-#     parser.add_argument('--datafile', '-d', type=str,
-#                         # default='oxidation_test.csv',
-#                         default='data/suzuki_type_test_v2.csv',
-#                         # default='CN_coupling_test.csv',
-#                         help='csv file containing the dataset')
     parser.add_argument('--method', '-m', type=str, choices=method_list,
                         help='method name', default='nfp')
-#     parser.add_argument('--label', '-l', nargs='+',
-#                         # default=['Yield', 'Temperature', 'Reagent', 'Catalyst'],
-#                         default=['Yield', 'M', 'L', 'B', 'S', 'A', 'id'],
-#                         help='target label for regression')
     parser.add_argument('--scale', type=str, choices=scale_list,
                         help='label scaling method', default='standardize')
     parser.add_argument('--conv-layers', '-c', type=int, default=4,
@@ -123,11 +114,11 @@ def main():
         class_dict = {'M': 44, 'L': 47, 'B': 13, 'S': 22, 'A': 74}
         dataset_filename = 'test_CN_data.npz'
         labels = ['Yield', 'M', 'L', 'B', 'S', 'A', 'id']
-    elif args.data_name == 'Neigishi':
-        datafile = 'data/Neigishi_test.csv'
+    elif args.data_name == 'Negishi':
+        datafile = 'data/Negishi_test.csv'
         class_num = 106
         class_dict = {'M': 32, 'L': 20, 'T': 8, 'S': 10, 'A': 30}
-        dataset_filename = 'test_Neigishi_data.npz'
+        dataset_filename = 'test_Negishi_data.npz'
         labels = ['Yield', 'M', 'L', 'T', 'S', 'A', 'id']
     elif args.data_name == 'PKR':
         datafile = 'data/PKR_test.csv'
