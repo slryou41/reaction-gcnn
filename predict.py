@@ -123,12 +123,18 @@ def main():
         class_dict = {'M': 44, 'L': 47, 'B': 13, 'S': 22, 'A': 74}
         dataset_filename = 'test_CN_data.npz'
         labels = ['Yield', 'M', 'L', 'B', 'S', 'A', 'id']
-    elif args.data_name == 'Negishi':
-        datafile = 'data/Negishi_test.csv'
+    elif args.data_name == 'Neigishi':
+        datafile = 'data/Neigishi_test.csv'
         class_num = 106
         class_dict = {'M': 32, 'L': 20, 'T': 8, 'S': 10, 'A': 30}
-        dataset_filename = 'test_Negishi_data.npz'
+        dataset_filename = 'test_Neigishi_data.npz'
         labels = ['Yield', 'M', 'L', 'T', 'S', 'A', 'id']
+    elif args.data_name == 'PKR':
+        datafile = 'data/PKR_test.csv'
+        class_num = 83
+        class_dict = {'M': 18, 'L': 6, 'T': 7, 'S': 15, 'A': 11, 'G': 1, 'O': 13, 'P': 4, 'other': 1}
+        dataset_filename = 'PKR_data.npz'
+        labels = ['Yield', 'M', 'L', 'T', 'S', 'A', 'G', 'O', 'P', 'other', 'id']
     else:
         raise ValueError('Unexpected dataset name')
     
@@ -140,10 +146,6 @@ def main():
 
     print('Preprocessing dataset...')
     
-    # Apply a preprocessor to the dataset.
-    # dataset_filename = 'CN_test_data.npz'
-    # dataset_filename = 'test_data.npz'
-
     # Load the cached dataset.
     dataset_cache_path = os.path.join(cache_dir, dataset_filename)
     

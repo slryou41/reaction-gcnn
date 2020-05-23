@@ -21,3 +21,5 @@ Example:
 ```python
 python predict.py -m relgcn -i relgcn_output -g 0 --load-modelname relgcn_output/model_epoch-1 --data-name suzuki
 ```
+
+4. Modify the path to the result directory in ``convert_to_evaluation_format.ipynb`` and generate json files. 
