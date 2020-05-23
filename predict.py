@@ -124,7 +124,7 @@ def main():
         datafile = 'data/PKR_test.csv'
         class_num = 83
         class_dict = {'M': 18, 'L': 6, 'T': 7, 'S': 15, 'A': 11, 'G': 1, 'O': 13, 'P': 4, 'other': 1}
-        dataset_filename = 'PKR_data.npz'
+        dataset_filename = 'test_PKR_data.npz'
         labels = ['Yield', 'M', 'L', 'T', 'S', 'A', 'G', 'O', 'P', 'other', 'id']
     else:
         raise ValueError('Unexpected dataset name')
