@@ -271,9 +271,7 @@ def main():
     else:
         raise ValueError('Unexpected dataset name')
     
-    tmp_dir = '/home/ubuntu/experiments/efs/chemistry/input'
-    cache_dir = os.path.join(tmp_dir, '{}_all'.format(method))
-    # cache_dir = os.path.join('input', '{}_all'.format(method))
+    cache_dir = os.path.join('input', '{}_all'.format(method))
     
     # Dataset preparation. Postprocessing is required for the regression task.
     def postprocess_label(label_list):
