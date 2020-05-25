@@ -66,17 +66,8 @@ def parse_arguments():
 
     # Set up the argument parser.
     parser = ArgumentParser(description='Regression on own dataset')
-#     parser.add_argument('--datafile', '-d', type=str,
-#                         # default='oxidation_test.csv',
-#                         default='data/suzuki_type_test_v2.csv',
-#                         # default='CN_coupling_test.csv',
-#                         help='csv file containing the dataset')
     parser.add_argument('--method', '-m', type=str, choices=method_list,
                         help='method name', default='nfp')
-#     parser.add_argument('--label', '-l', nargs='+',
-#                         # default=['Yield', 'Temperature', 'Reagent', 'Catalyst'],
-#                         default=['Yield', 'M', 'L', 'B', 'S', 'A', 'id'],
-#                         help='target label for regression')
     parser.add_argument('--scale', type=str, choices=scale_list,
                         help='label scaling method', default='standardize')
     parser.add_argument('--conv-layers', '-c', type=int, default=4,
@@ -129,6 +120,12 @@ def main():
         class_dict = {'M': 32, 'L': 20, 'T': 8, 'S': 10, 'A': 30}
         dataset_filename = 'test_Negishi_data.npz'
         labels = ['Yield', 'M', 'L', 'T', 'S', 'A', 'id']
+    elif args.data_name == 'PKR':
+        datafile = 'data/PKR_test.csv'
+        class_num = 83
+        class_dict = {'M': 18, 'L': 6, 'T': 7, 'S': 15, 'A': 11, 'G': 1, 'O': 13, 'P': 4, 'other': 1}
+        dataset_filename = 'test_PKR_data.npz'
+        labels = ['Yield', 'M', 'L', 'T', 'S', 'A', 'G', 'O', 'P', 'other', 'id']
     else:
         raise ValueError('Unexpected dataset name')
     
@@ -140,10 +137,6 @@ def main():
 
     print('Preprocessing dataset...')
     
-    # Apply a preprocessor to the dataset.
-    # dataset_filename = 'CN_test_data.npz'
-    # dataset_filename = 'test_data.npz'
-
     # Load the cached dataset.
     dataset_cache_path = os.path.join(cache_dir, dataset_filename)
     
