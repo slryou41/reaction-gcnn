@@ -236,17 +236,8 @@ def parse_arguments():
 
     # Set up the argument parser.
     parser = ArgumentParser(description='Regression on own dataset')
-#     parser.add_argument('--datafile', '-d', type=str,
-#                         # default='oxidation_train.csv',
-#                         default='data/suzuki_type_train_v2.csv',
-#                         # default='CN_coupling_train.csv',
-#                         help='csv file containing the dataset')
     parser.add_argument('--method', '-m', type=str, choices=method_list,
                         help='method name', default='nfp')
-#     parser.add_argument('--label', '-l', nargs='+',
-#                         # default=['Yield', 'Temperature', 'Reagent', 'Catalyst'],
-#                         default=['Yield', 'M', 'L', 'B', 'S', 'A', 'id'],
-#                         help='target label for regression')
     parser.add_argument('--scale', type=str, choices=scale_list,
                         help='label scaling method', default='standardize')
     parser.add_argument('--conv-layers', '-c', type=int, default=4,
@@ -298,29 +289,21 @@ def main():
         class_dict = {'M': 32, 'L': 20, 'T': 8, 'S': 10, 'A': 30}
         dataset_filename = 'Negishi_data.npz'
         labels = ['Yield', 'M', 'L', 'T', 'S', 'A', 'id']
+    elif args.data_name == 'PKR':
+        datafile = 'data/PKR_train.csv'
+        class_num = 83
+        class_dict = {'M': 18, 'L': 6, 'T': 7, 'S': 15, 'A': 11, 'G': 1, 'O': 13, 'P': 4, 'other': 1}
+        dataset_filename = 'PKR_data.npz'
+        labels = ['Yield', 'M', 'L', 'T', 'S', 'A', 'G', 'O', 'P', 'other', 'id']
     else:
         raise ValueError('Unexpected dataset name')
-
+    
     cache_dir = os.path.join('input', '{}_all'.format(method))
     
-    # if args.label:
-    #     labels = args.label
-    #     # class_num = len(labels) if isinstance(labels, list) else 1
-    #     cache_dir = os.path.join(tmp_dir, '{}_all'.format(method))
-    #     # cache_dir = os.path.join('input', '{}_all'.format(method))
-    #     # class_num = 119
-    #     # class_num = 206
-    # else:
-    #     raise ValueError('No target label was specified.')
-
     # Dataset preparation. Postprocessing is required for the regression task.
     def postprocess_label(label_list):
         return numpy.asarray(label_list, dtype=numpy.float32)
     
-    # Apply a preprocessor to the dataset.
-    # dataset_filename = 'CN_data.npz'
-    # dataset_filename = 'data.npz'
-
     # Load the cached dataset.
     dataset_cache_path = os.path.join(cache_dir, dataset_filename)
 
@@ -357,16 +340,6 @@ def main():
         end_len = len(yields) #int(len(yields) / 4)
         range_exp = range_exp[start_len:end_len]        
         
-        """
-        range_dataset = (dataset.get_datasets()[0][range_exp[:,0]],
-                         dataset.get_datasets()[1][range_exp[:,0]],
-                         dataset.get_datasets()[2][range_exp[:,0]],
-                         dataset.get_datasets()[3][range_exp[:,0]],
-                         dataset.get_datasets()[4][range_exp[:,0]],
-                         dataset.get_datasets()[5][range_exp[:,0]])
-        yields = yields[range_exp[:,0]]
-        labels = labels[range_exp[:,0]]
-        """
         range_dataset = (dataset.get_datasets()[0][range_exp],
                          dataset.get_datasets()[1][range_exp],
                          dataset.get_datasets()[2][range_exp],

@@ -163,57 +163,70 @@ class SuzukiDataFrameParser(BaseFileParser):
                                 
                 # Reagent vector for each category
                 #  'M', 'L', 'B', 'S', 'A'
-                for reagent_i in range(1, 6):
+                for reagent_i in range(1, 1+len(self.label_dicts)):
                     if len(labels[reagent_i]) == 2:
                         labels[reagent_i] = []
                     else:
                         labels[reagent_i] = [int(x) for x in labels[reagent_i][1:-1].split(',')]
-                    
-                # num_dicts = {'M': 28, 'L': 23, 'B': 35, 'S': 10, 'A': 17} # A has nan -> 18
-                # num_dicts = {'M': 44, 'L': 47, 'B': 13, 'S': 22, 'A': 74}  # For C-N coupling
                 
-                boundaries = []
                 total_labels = 0
-                for lb, lb_num in self.label_dicts.items():
+                non_binary = []
+                other_flag = 1
+                for l_id, (lb, lb_num) in enumerate(self.label_dicts.items()):
                     total_labels += lb_num
-                                                        
-                
+                    if lb_num != 1:
+                        non_binary.append(l_id+1)
+                    if lb == 'other':
+                        other_flag = 0      
+                        
                 # For now, predict single vector
-                rea_cat = numpy.zeros(total_labels+len(self.label_dicts)+1, dtype='float32')  # 113 -> 119 (nan + 5 null)
-                # rea_cat = numpy.zeros(206, dtype='float32')  # 113 -> 119 (nan + 5 null)
+                rea_cat = numpy.zeros(total_labels+len(non_binary)+other_flag, dtype='float32')  # unknown + nulls
                 for ii in range(1, 1+len(self.label_dicts)):
                     rea_cat[labels[ii]] = 1.
                     
-                # if the sample does not have reagent in each category, map to null class
-                for ii in range(1, 1+len(self.label_dicts)):
-                    if len(labels[ii]) == 0:  # no reagent in this category
-                        rea_cat[total_labels + ii] = 1.
-                        # rea_cat[201 + ii-1] = 1.
-                    
+                for __i, ii in enumerate(non_binary):
+                    if len(labels[ii]) == 0:
+                        rea_cat[total_labels + other_flag + __i] = 1.
+                        
                 labels = [labels[0], labels[-1], rea_cat]
                 
                 try:
-                    mols = [Chem.MolFromSmiles(s) for s in smiles]
-                    # mol1 = Chem.MolFromSmiles(smiles1)
-                    # mol2 = Chem.MolFromSmiles(smiles2)
+                    # Does not consider order here ([reactant1, product] when reactant 2 is missing)
+                    mols = [Chem.MolFromSmiles(s) for s in smiles if type(s) == str]
+                    
                     if None in mols:
                         fail_count += 1
                         if return_is_successful:
                             is_successful_list.append(False)
                         continue
                         
+                    mols = []
+                    for s in smiles:
+                        if type(s) == str:
+                            mols.append(Chem.MolFromSmiles(s))
+                        else:
+                            mols.append(None)
+                        
                     # Note that smiles expression is not unique.
                     # we obtain canonical smiles
                     canonical_smiles = []
                     final_mols = []
                     input_features = []
+                    
                     for mol in mols:
-                        _canonical_smiles, _mol = pp.prepare_smiles_and_mol(mol) # NON CANONICAL SMILES!!!! 11/21
-                        _input_features = pp.get_input_features(mol)  # _mol -> mol (non_canonical smiles)
-                        
-                        canonical_smiles.append(_canonical_smiles)
-                        final_mols.append(mol) # _mol -> mol
-                        input_features.append(_input_features)
+                        if mol is not None:
+                            _canonical_smiles, _mol = pp.prepare_smiles_and_mol(mol) # NON CANONICAL SMILES!!!! 11/21
+                            _input_features = pp.get_input_features(mol)  # _mol -> mol (non_canonical smiles)
+
+                            canonical_smiles.append(_canonical_smiles)
+                            final_mols.append(mol) # _mol -> mol
+                            input_features.append(_input_features)
+                        else:
+                            null_values = _input_features[0].copy()
+                            # null_values[:] = -1
+                            null_adjs = _input_features[1].copy()
+                            # null_adjs[:] = -1
+                            input_features.append((null_values, null_adjs))
 
                     # Extract label
                     if self.postprocess_label is not None:
