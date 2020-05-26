@@ -163,31 +163,31 @@ def set_up_predictor(method, n_unit, conv_layers, class_num):
     if method == 'nfp':
         print('Training an NFP predictor...')
         if chainer_chemistry.__version__ == '0.7.0':
-          nfp = NFP(out_dim=n_unit, hidden_channels=n_unit, n_update_layers=conv_layers)
+            nfp = NFP(out_dim=n_unit, hidden_channels=n_unit, n_update_layers=conv_layers)
         else:
-          nfp = NFP(out_dim=n_unit, hidden_dim=n_unit, n_layers=conv_layers)
+            nfp = NFP(out_dim=n_unit, hidden_dim=n_unit, n_layers=conv_layers)
         predictor = GraphConvPredictor(nfp, mlp)
     elif method == 'ggnn':
         print('Training a GGNN predictor...')
         if chainer_chemistry.__version__ == '0.7.0':
-          ggnn = GGNN(out_dim=n_unit, hidden_channels=n_unit, n_update_layers=conv_layers)
+            ggnn = GGNN(out_dim=n_unit, hidden_channels=n_unit, n_update_layers=conv_layers)
         else:
-          ggnn = GGNN(out_dim=n_unit, hidden_dim=n_unit, n_layers=conv_layers)
+            ggnn = GGNN(out_dim=n_unit, hidden_dim=n_unit, n_layers=conv_layers)
         predictor = GraphConvPredictor(ggnn, mlp)
     elif method == 'mpnn':
         print('Training a MPNN predictor...')
         if chainer_chemistry.__version__ == '0.7.0':
-          mpnn = MPNN(out_dim=n_unit, hidden_channels=n_unit, n_update_layers=conv_layers)
+            mpnn = MPNN(out_dim=n_unit, hidden_channels=n_unit, n_update_layers=conv_layers)
         else:
-          mpnn = MPNN(out_dim=n_unit, hidden_dim=n_unit, n_layers=conv_layers)
+            mpnn = MPNN(out_dim=n_unit, hidden_dim=n_unit, n_layers=conv_layers)
         predictor = GraphConvPredictor(mpnn, mlp)
     elif method == 'schnet':
         print('Training an SchNet predictor...')
         if chainer_chemistry.__version__ == '0.7.0':
-          schnet = SchNet(out_dim=class_num, hidden_channels=n_unit,
+            schnet = SchNet(out_dim=class_num, hidden_channels=n_unit,
                           n_update_layers=conv_layers)
         else:
-          schnet = SchNet(out_dim=class_num, hidden_dim=n_unit,
+            schnet = SchNet(out_dim=class_num, hidden_dim=n_unit,
                           n_layers=conv_layers)
 
         predictor = GraphConvPredictor(schnet, None)
@@ -203,9 +203,9 @@ def set_up_predictor(method, n_unit, conv_layers, class_num):
     elif method == 'rsgcn':
         print('Training an RSGCN predictor...')
         if chainer_chemistry.__version__ == '0.7.0':
-          rsgcn = RSGCN(out_dim=n_unit, hidden_channels=n_unit, n_update_layers=conv_layers)
+            rsgcn = RSGCN(out_dim=n_unit, hidden_channels=n_unit, n_update_layers=conv_layers)
         else:
-          rsgcn = RSGCN(out_dim=n_unit, hidden_dim=n_unit, n_layers=conv_layers)
+            rsgcn = RSGCN(out_dim=n_unit, hidden_dim=n_unit, n_layers=conv_layers)
         predictor = GraphConvPredictor(rsgcn, mlp)
     elif method == 'relgcn':
         print('Training an RelGCN predictor...')
@@ -217,10 +217,10 @@ def set_up_predictor(method, n_unit, conv_layers, class_num):
     elif method == 'relgat':
         print('Training an RelGAT predictor...')
         if chainer_chemistry.__version__ == '0.7.0':
-          relgat = RelGAT(out_dim=n_unit, hidden_channels=n_unit,
+            relgat = RelGAT(out_dim=n_unit, hidden_channels=n_unit,
                           n_update_layers=conv_layers)
         else:
-          relgat = RelGAT(out_dim=n_unit, hidden_dim=n_unit,
+            relgat = RelGAT(out_dim=n_unit, hidden_dim=n_unit,
                           n_layers=conv_layers)
         predictor = GraphConvPredictor(relgat, mlp)
     else:
@@ -313,7 +313,11 @@ def main():
         dataset = NumpyTupleDataset.load(dataset_cache_path)
     if dataset is None:
         print('Preprocessing dataset...')
-        preprocessor = preprocess_method_dict[args.method]()
+        if args.method == 'mpnn':
+            preprocessor = preprocess_method_dict['ggnn']()
+        else:
+            preprocessor = preprocess_method_dict[args.method]()
+
         parser = CSVFileParser(preprocessor, postprocess_label=postprocess_label,
                                labels=labels, smiles_col=['Reactant1', 'Reactant2', 'Product'],
                                label_dicts=class_dict)
