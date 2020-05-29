@@ -145,7 +145,10 @@ def main(input_args=None):
         print('Loading cached dataset from {}.'.format(dataset_cache_path))
         dataset = NumpyTupleDataset.load(dataset_cache_path)
     if dataset is None:
-        preprocessor = preprocess_method_dict[args.method]()
+        if args.method == 'mpnn':
+            preprocessor = preprocess_method_dict['ggnn']()
+        else:
+            preprocessor = preprocess_method_dict[args.method]()
         parser = CSVFileParser(preprocessor, postprocess_label=postprocess_label,
                               labels=labels, smiles_col=['Reactant1', 'Reactant2', 'Product'],
                               label_dicts=class_dict)
