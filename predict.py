@@ -58,7 +58,7 @@ class ScaledGraphConvPredictor(GraphConvPredictor):
         return h #Variable(h)
 
 
-def parse_arguments():
+def parse_arguments(input_args=None):
     # Lists of supported preprocessing methods/models.
     method_list = ['nfp', 'ggnn', 'mpnn', 'schnet', 'weavenet', 'rsgcn', 'relgcn',
                    'relgat']
@@ -93,12 +93,12 @@ def parse_arguments():
                         help='load model filename')
     parser.add_argument('--data-name', type=str, default='suzuki',
                         help='dataset name')
-    return parser.parse_args()
+    return parser.parse_args(input_args)
 
 
-def main():
+def main(input_args=None):
     # Parse the arguments.
-    args = parse_arguments()
+    args = parse_arguments(input_args)
     device = args.gpu
     method = args.method
     
