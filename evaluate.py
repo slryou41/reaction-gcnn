@@ -143,7 +143,7 @@ def compute_PR(data, type_count, K=3):
 
 
 # Per-sample accuracy in each category
-def accuracy(data, type_count, K=3):
+def accuracy(data, type_count, K=3, formatted_print=False):
     
     total_num = {x: 0 for x in type_count.keys()}
     top1 = {x: 0 for x in type_count.keys()}
@@ -180,11 +180,20 @@ def accuracy(data, type_count, K=3):
     top1_acc = {x: float(top1[x])/total_num[x] for x in type_count.keys()}
     topk_acc = {x: float(topk[x])/total_num[x] for x in type_count.keys()}
     
-    for t in type_names:
-        print("Top 1 accuracy for type ", t, " :", top1_acc[t])
-        print("Top k accuracy for type ", t, " :", topk_acc[t])
-        
+    if formatted_print:
+        print("Top 1 accuracy for", type_names)
+        for t in type_names:
+            print(top1_acc[t])
+        print("Top k accuracy for", type_names)
+        for t in type_names:
+            print(topk_acc[t])
+    else:
+        for t in type_names:
+            print("Top 1 accuracy for type ", t, " :", top1_acc[t])
+            print("Top k accuracy for type ", t, " :", topk_acc[t])
+
     return top1_acc, topk_acc
+
 
 if __name__ == "__main__":
     
