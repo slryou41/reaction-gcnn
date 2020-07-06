@@ -31,12 +31,15 @@ import chainer_chemistry
 from chainer_chemistry.dataset.converters import concat_mols
 from chainer_chemistry.dataset.preprocessors import preprocess_method_dict
 from chainer_chemistry.datasets import NumpyTupleDataset
+# from chainer_chemistry.models import (
+#     MLP, GGNN, MPNN, SchNet, WeaveNet, RSGCN, RelGAT)  # for future use..
 from chainer_chemistry.models import (
-    MLP, GGNN, MPNN, SchNet, WeaveNet, RSGCN, RelGAT)  # for future use..
+    MLP, GGNN, SchNet, WeaveNet, RSGCN, RelGAT)  # for future use..
 
-from models import RelGCN, Classifier, NFP, GGNN
+from models import RelGCN, Classifier, NFP, GGNN, AttentionReadout
 
 from dataset.suzuki_csv_file_parser import SuzukiCSVFileParser as CSVFileParser
+from chainer import functions
 
 
 class GraphConvPredictor(chainer.Chain):
@@ -54,6 +57,8 @@ class GraphConvPredictor(chainer.Chain):
         super(GraphConvPredictor, self).__init__()
         with self.init_scope():
             self.graph_conv = graph_conv
+            self.aggr_attention = AttentionReadout(out_dim=128, hidden_dim=64,
+                    nobias=True, activation=functions.tanh)
             if isinstance(mlp, chainer.Link):
                 self.mlp = mlp
         if not isinstance(mlp, chainer.Link):
@@ -61,10 +66,16 @@ class GraphConvPredictor(chainer.Chain):
 
     def __call__(self, atoms1, adjs1, atoms2, adjs2, atoms3, adjs3, conds):
         
-        h1 = self.graph_conv(atoms1, adjs1)
-        h2 = self.graph_conv(atoms2, adjs2)
-        h3 = self.graph_conv(atoms3, adjs3)
-        h = F.concat((h1, h2, h3), axis=1)
+        h1, h1_0, h1_real_node = self.graph_conv(atoms1, adjs1)
+        h2, h2_0, h2_real_node = self.graph_conv(atoms2, adjs2)
+        h3, h3_0, h3_real_node = self.graph_conv(atoms3, adjs3)
+        # h = F.concat((h1, h2, h3), axis=1)
+        # import pdb; pdb.set_trace()
+#         h1 = cuda.to_gpu(h1); h1_0 = cuda.to_gpu(h1_0)
+#         h2 = cuda.to_gpu(h2); h1_0 = cuda.to_gpu(h2_0)
+#         h3 = cuda.to_gpu(h3); h1_0 = cuda.to_gpu(h3_0)
+        
+        h = self.aggr_attention([h1, h2, h3], [h1_0, h2_0, h3_0], [h1_real_node, h2_real_node, h3_real_node])
         
         if self.mlp:
             h = self.mlp(h)
@@ -172,7 +183,7 @@ def set_up_predictor(method, n_unit, conv_layers, class_num):
         if chainer_chemistry.__version__ == '0.7.0':
             ggnn = GGNN(out_dim=n_unit, hidden_channels=n_unit, n_update_layers=conv_layers)
         else:
-            ggnn = GGNN(out_dim=n_unit, hidden_dim=n_unit, n_layers=conv_layers)
+            ggnn = GGNN(out_dim=n_unit, hidden_dim=n_unit, n_layers=conv_layers, readout=False)
         predictor = GraphConvPredictor(ggnn, mlp)
     elif method == 'mpnn':
         print('Training a MPNN predictor...')
@@ -212,7 +223,7 @@ def set_up_predictor(method, n_unit, conv_layers, class_num):
         num_edge_type = 4
 
         relgcn = RelGCN(out_channels=n_unit, num_edge_type=num_edge_type,
-                        scale_adj=True, readout=True)
+                        scale_adj=True, readout=False)
         predictor = GraphConvPredictor(relgcn, mlp)
     elif method == 'relgat':
         print('Training an RelGAT predictor...')

@@ -44,18 +44,18 @@ class AttentionReadout(chainer.Chain):
         # --- Readout part ---
         # h, h0: (minibatch, node, ch)
         # is_real_node: (minibatch, node)
-        # import pdb; pdb.set_trace()
         gs = []
         for ii in range(len(h)):
-            h1 = h[ii]
+            h1 = functions.concat((h[ii], h0[ii]), axis=2) if h0[ii] is not None else h[ii]
+            # h1 = h[ii]
 
             g1 = functions.sigmoid(self.i_layer(h1))
             g2 = self.activation(self.j_layer(h1))
             g = g1 * g2
-            if is_real_node is not None:
+            if is_real_node[ii] is not None:
                 # mask virtual node feature to be 0
                 mask = self.xp.broadcast_to(
-                    is_real_node[:, :, None], g.shape)
+                    is_real_node[ii][:, :, None], g.shape)
                 g = g * mask
             gs.append(g)
             
@@ -72,4 +72,4 @@ class AttentionReadout(chainer.Chain):
         # if self.vis_attention:
         #     return g, att
         
-        return g, _g, att
+        return g #, _g, att
