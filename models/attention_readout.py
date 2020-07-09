@@ -30,8 +30,8 @@ class AttentionReadout(chainer.Chain):
             self.i_layer = GraphLinear(None, out_dim, nobias=nobias)
             self.j_layer = GraphLinear(None, out_dim, nobias=nobias)
             
-            self.ch_attention = GraphLinear(None, out_dim*3, nobias=nobias)  # out_dim, 1, out_dim*3
-            self.ch_layer = GraphLinear(None, out_dim*3, nobias=nobias)  # out_dim*3
+            self.ch_attention = GraphLinear(None, out_dim*3, nobias=nobias)
+            self.ch_layer = GraphLinear(None, out_dim*3, nobias=nobias) 
         self.out_dim = out_dim
         self.hidden_dim = hidden_dim
         self.nobias = nobias
@@ -46,13 +46,14 @@ class AttentionReadout(chainer.Chain):
         # is_real_node: (minibatch, node)
         gs = []
         for ii in range(len(h)):
-            h1 = functions.concat((h[ii], h0[ii]), axis=2) if h0[ii] is not None else h[ii]
-            # h1 = h[ii]
+            # h1 = functions.concat((h[ii], h0[ii]), axis=2) if h0[ii] is not None else h[ii]
+            h1 = h[ii]
 
             g1 = functions.sigmoid(self.i_layer(h1))
             g2 = self.activation(self.j_layer(h1))
             g = g1 * g2
-            if is_real_node[ii] is not None:
+            if is_real_node is not None:
+            # if is_real_node[ii] is not None:
                 # mask virtual node feature to be 0
                 mask = self.xp.broadcast_to(
                     is_real_node[ii][:, :, None], g.shape)

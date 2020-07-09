@@ -31,10 +31,8 @@ import chainer_chemistry
 from chainer_chemistry.dataset.converters import concat_mols
 from chainer_chemistry.dataset.preprocessors import preprocess_method_dict
 from chainer_chemistry.datasets import NumpyTupleDataset
-# from chainer_chemistry.models import (
-#     MLP, GGNN, MPNN, SchNet, WeaveNet, RSGCN, RelGAT)  # for future use..
 from chainer_chemistry.models import (
-    MLP, GGNN, SchNet, WeaveNet, RSGCN, RelGAT)  # for future use..
+    MLP, GGNN, MPNN, SchNet, WeaveNet, RSGCN, RelGAT)  # for future use..
 
 from models import RelGCN, Classifier, NFP, GGNN, AttentionReadout
 
@@ -66,16 +64,12 @@ class GraphConvPredictor(chainer.Chain):
 
     def __call__(self, atoms1, adjs1, atoms2, adjs2, atoms3, adjs3, conds):
         
-        h1, h1_0, h1_real_node = self.graph_conv(atoms1, adjs1)
-        h2, h2_0, h2_real_node = self.graph_conv(atoms2, adjs2)
-        h3, h3_0, h3_real_node = self.graph_conv(atoms3, adjs3)
-        # h = F.concat((h1, h2, h3), axis=1)
-        # import pdb; pdb.set_trace()
-#         h1 = cuda.to_gpu(h1); h1_0 = cuda.to_gpu(h1_0)
-#         h2 = cuda.to_gpu(h2); h1_0 = cuda.to_gpu(h2_0)
-#         h3 = cuda.to_gpu(h3); h1_0 = cuda.to_gpu(h3_0)
+        h1 = self.graph_conv(atoms1, adjs1)  # , h1_0, h1_real_node
+        h2 = self.graph_conv(atoms2, adjs2)  # , h2_0, h2_real_node
+        h3 = self.graph_conv(atoms3, adjs3)  # , h3_0, h3_real_node
         
-        h = self.aggr_attention([h1, h2, h3], [h1_0, h2_0, h3_0], [h1_real_node, h2_real_node, h3_real_node])
+        # h = self.aggr_attention([h1, h2, h3], [h1_0, h2_0, h3_0], [h1_real_node, h2_real_node, h3_real_node])
+        h = self.aggr_attention([h1, h2, h3])
         
         if self.mlp:
             h = self.mlp(h)

@@ -183,6 +183,7 @@ def main(input_args=None):
     if args.load_modelname:
         serializers.load_npz(args.load_modelname, classifier)
     scaled_predictor = ScaledGraphConvPredictor(graph_conv=classifier.predictor.graph_conv, mlp=classifier.predictor.mlp)
+    scaled_predictor.aggr_attention = classifier.predictor.aggr_attention  # ADDED
     classifier.predictor = scaled_predictor
     
     # This callback function extracts only the inputs and discards the labels.
