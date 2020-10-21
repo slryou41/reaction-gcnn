@@ -1,7 +1,12 @@
-# Graph Neural Networks for the Prediction of Substrate-Specific Organic Reaction Conditions
-Chainer implementation of [Graph Neural Networks for the Prediction of Substrate-Specific Organic Reaction Conditions](https://arxiv.org/abs/2007.04275), Serim Ryou*, Michael R. Maser*, Alexander Y. Cui*, Travis J. DeLano, Yisong Yue, Sarah E. Reisman, ICML 2020 Graph Representation Learning and Beyond (GRL+) Workshop
+# Multi-Label Classification Models for the Prediction of Cross-Coupling Reaction Conditions
+Code repository for [Multi-Label Classification Models for the Prediction of Cross-Coupling Reaction Conditions](https://chemrxiv.org/articles/preprint/Multi-Label_Classification_Models_for_the_Prediction_of_Cross-Coupling_Reaction_Conditions/13087769?file=25049036), Michael R. Maser*, Alexander Y. Cui*, Serim Ryou*, Travis J. DeLano, Yisong Yue, Sarah E. Reisman ChemRxiv. 
 
-## Requirements
+Including:
+
+# Graph Neural Networks for the Prediction of Substrate-Specific Organic Reaction Conditions
+Chainer implementation of [Graph Neural Networks for the Prediction of Substrate-Specific Organic Reaction Conditions](https://arxiv.org/abs/2007.04275), Serim Ryou*, Michael R. Maser*, Alexander Y. Cui*, Travis J. DeLano, Yisong Yue, Sarah E. Reisman, ICML 2020 Graph Representation Learning and Beyond (GRL+) Workshop. arXiv:2007.04275
+
+## Requirements for GNN modeling
 
 1. Install [chainer-chemistry](https://github.com/chainer/chainer-chemistry)
 2. Download the dataset by following the [instruction](https://github.com/slryou41/reaction-gcnn/blob/master/data/data_processing_example.ipynb) from Reaxys®
