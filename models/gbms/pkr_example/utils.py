@@ -44,10 +44,7 @@ def find_correct_path(paths=None):
         FileNotFoundError = IOError
     if paths is None:
         paths = [
-            '/Users/agarbuno/gDrive/postdoc/cms-273/data/',
-            '/media/sf_alexb/Google Drive/Caltech/cms-273/data/',
-            '/home/ubuntu/cms273/data/',
-            '/home/ubuntu/chemistry-ai/data/'
+            '/home/ubuntu/reaction-gcnn/data/'
         ]
     for path in paths:
         if os.path.exists(path):
@@ -56,7 +53,7 @@ def find_correct_path(paths=None):
         raise FileNotFoundError("None of the paths are valid")
 
 
-def load_base_xlsx(xl_name='Alyllic Oxidation Initial Training Data.xlsx',
+def load_base_xlsx(xl_name='Negishi_binned_final.xlsx',
 				   sheet_name = 1,
 				   nrows=3843,
 				   usecols=tuple([1,2,3,4,5,6]),
