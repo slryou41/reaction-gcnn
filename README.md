@@ -6,6 +6,9 @@ Including:
 # Graph Neural Networks for the Prediction of Substrate-Specific Organic Reaction Conditions
 Chainer implementation of [Graph Neural Networks for the Prediction of Substrate-Specific Organic Reaction Conditions](https://arxiv.org/abs/2007.04275), Serim Ryou*, Michael R. Maser*, Alexander Y. Cui*, Travis J. DeLano, Yisong Yue, Sarah E. Reisman, ICML 2020 Graph Representation Learning and Beyond (GRL+) Workshop. arXiv:2007.04275
 
+## Link to view jupyter notebooks on your browser
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/slryou41/reaction-gcnn/HEAD)
+
 ## Requirements for GNN modeling
 
 1. Install [chainer-chemistry](https://github.com/chainer/chainer-chemistry)
