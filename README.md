@@ -1,5 +1,5 @@
 # Multi-Label Classification Models for the Prediction of Cross-Coupling Reaction Conditions
-Code repository for [Multi-Label Classification Models for the Prediction of Cross-Coupling Reaction Conditions](https://chemrxiv.org/articles/preprint/Multi-Label_Classification_Models_for_the_Prediction_of_Cross-Coupling_Reaction_Conditions/13087769?file=25049036), Michael R. Maser*, Alexander Y. Cui*, Serim Ryou*, Travis J. DeLano, Yisong Yue, Sarah E. Reisman ChemRxiv. 
+Code repository for [Multilabel Classification Models for the Prediction of Cross-Coupling Reaction Conditions](https://pubs.acs.org/doi/10.1021/acs.jcim.0c01234), Michael R. Maser*, Alexander Y. Cui*, Serim Ryou*, Travis J. DeLano, Yisong Yue, Sarah E. Reisman J. Chem. Inf. Model. 2021, 61, 156. 
 
 Including:
 
